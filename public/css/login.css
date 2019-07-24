@@ -1,0 +1,40 @@
+ /* 设置整个模块的颜色 */
+ .store{
+    /* background-color: bisque; */
+    
+}
+/* 设置标题的样式  背景颜色 字体大小 宽度 */
+span{background-color:#f3d2ab;
+width: 100%;
+display: block;
+font-size: 28px;
+text-align: center;
+margin-bottom: 10px}
+/* 设置内容的默认不显示 */
+.content{display: none;width: 100%;
+    flex-flow:wrap;
+    justify-content:space-around}
+/* 当鼠标移动到店铺名称上时 显示内容 */
+.store:hover .content{
+    /* display: flex; */
+   }
+/* 设置内容中文字对齐方式 */
+.dress{
+    color:#696666;
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+/* 设置内容中图片的宽度 */
+.dress>img{width: 300px;}
+/* 设置内容中的按钮样式 */
+.dress>button{
+    border:0px;
+    width: 150px;height: 30px;
+    font-size: 22px;color:pink;
+    background-color: white;
+    line-height: 26px;
+    border: 2px solid peachpuff;
+    border-radius: 20%;
+    margin-bottom: 10px;
+}

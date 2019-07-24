@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 导入css-->
+    <link rel="stylesheet" href="../css/login.css"/>
+      <!-- 导入3个js,有顺序要求-->
+      <script src="../js/login.js"></script>
+
+</head>
+<body>
+    <!-- 设置一个页面的效果 -->
+    <div class="store" >
+        <!-- 店铺标题 -->
+        <span > 梨花渡</span>
+        <!-- 店铺内容 -->
+        <div class="content">
+            <!-- 店铺中的服装 -->
+            <div class="dress">
+                    <img src="../img/01.jpg" alt=""> <br>
+                    衣服名称: 小狐狸   <br>
+                    衣服介绍:    <br>
+                    <button>详情</button>
+            </div>   
+            <div class="dress">
+                    <img src="../img/02.jpg" alt=""> <br>
+                    衣服名称:    <br>
+                    衣服介绍:    <br>
+                    <button>详情</button>
+            </div>  
+            <div class="dress">
+                    <img src="../img/03.jpg" alt=""> <br>
+                    衣服名称:    <br>
+                    衣服介绍:    <br>
+                    <button>详情</button>
+            </div>   
+            <div class="dress">
+                    <img src="../img/04.jpg" alt=""> <br>
+                    衣服名称:    <br>
+                    衣服介绍:    <br>
+                    <button>详情</button>
+            </div>          
+        </div>
+    </div>
+
+    <!-- 第二个店铺效果 -->
+    <div class="store"  onclick="sel(13)">
+            <!-- 店铺标题 -->
+        <span> 十三余</span>
+        <!-- 店铺内容 -->
+        <div class="content" id="content">
+            
+        </div>
+    </div>
+
+
+    
+    <script>
+
+        // 获取事件绑定的元素
+      var  elems=document.querySelectorAll('.store>span');
+      for(var elem of elems){
+         console.log(elem);
+         //为元素绑定上事件
+         elem.onclick=function(){
+             //获取需要修改的元素
+             var elem=this;
+             var div=elem.nextElementSibling;
+             //修改元素
+             if(div.style.display=="flex"){
+                div.style.display="none"
+             }else{
+                div.style.display="flex"
+             }
+             }
+                         
+         }
+
+         function sel(dstore){
+           console.log(dstore);
+           //1.创建xhr异步对象
+	        var xhr=new XMLHttpRequest();
+	        xhr.onreadystatechange=function(){
+	        if(xhr.readyState==4&&xhr.status==200){
+		        var result=xhr.responseText;
+                 console.log(result);
+                 var list=JSON.parse(result);
+                 console.log(list);
+                var html="";
+                for(var i=0;i<list.length;i++){
+                   //获取上架时间  需要分割字符串
+                    var time=list[i].dtime.split("T")[0];
+                    html+=`
+                    <div class="dress">
+                    <img src="../${list[i].dimg} " alt=""> <br>
+                    衣服名称: ${list[i].dname}   <br>
+                    衣服介绍:  ${list[i].ddesc}   <br>
+                    上架时间:  ${time}   <br>
+                    <button>详情</button>
+                    </div>   `
+            console.log("html")
+                }
+                 content.innerHTML=html
+			    }	
+		}
+        xhr.open('get','http://127.0.0.1:8080/store/reg?dstore='+dstore,true);
+          console.log(12355)
+         xhr.send();
+	     }
+         
+      
+      
+    </script>
+</body>
+</html>
